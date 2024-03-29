@@ -1,0 +1,10 @@
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\bin\Debug\Игра пазлы.exe.config
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\bin\Debug\Игра пазлы.exe
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\bin\Debug\Игра пазлы.pdb
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра пазлы.csproj.AssemblyReference.cache
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра_пазлы.Properties.Resources.resources
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра пазлы.csproj.GenerateResource.cache
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра пазлы.csproj.CoreCompileInputs.cache
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра пазлы.exe
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра пазлы.pdb
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра_пазлы.FormAuthorization.resources

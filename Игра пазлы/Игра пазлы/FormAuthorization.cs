@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Игра_пазлы
 {
@@ -17,6 +18,9 @@ namespace Игра_пазлы
         Color textBoxRegistrationPasswordUnderLineColor = Color.Green;
 
         bd BD=new bd();
+
+        bool passwordIsCorrect;
+        bool loginIsCorrect;
 
         public FormAuthorization()
         {
@@ -33,6 +37,13 @@ namespace Игра_пазлы
                 if (ctl.Name.Contains("Entrance") && !ctl.Name.Contains("Switch"))
                     controlsEntrance.Add(ctl);
             }
+
+            textBoxRegistrationName.TextChanged += (sender, e) => { CheckTextBoxes(); };
+            textBoxRegistrationSurname.TextChanged += (sender, e) => { CheckTextBoxes(); };
+            textBoxRegistrationLogin.TextChanged += (sender, e) => { CheckTextBoxes(); };
+            textBoxRegistrationPassword.TextChanged += (sender, e) => { CheckTextBoxes(); };
+
+            //buttonEntrance.FlatStyle = FlatStyle.Flat;
         }
 
         private void underlineForTextBox(){
@@ -95,6 +106,9 @@ namespace Игра_пазлы
             this.Height = 176;
 
             drawningElements(controlsRegistration, false);
+
+            toolTipRegistrationPassword?.Hide(textBoxRegistrationPassword);
+            toolTipRegistrationLogin?.Hide(textBoxRegistrationLogin);
 
             drawningElements(controlsEntrance, true);
 
@@ -198,25 +212,33 @@ namespace Игра_пазлы
 
             if (table.Rows.Count == 1)
             {
-                textBoxRegistrationLoginUnderLineColor = Color.Red;
-                this.Refresh();
+                if (textBoxRegistrationLoginUnderLineColor == Color.Green)
+                {
+                    textBoxRegistrationLoginUnderLineColor = Color.Red;
+                    this.Refresh();
 
-                toolTipRegistrationLogin.Show
-                    (
-                        "Такой пользователь уже существует",
-                        textBoxRegistrationLogin,
-                        textBoxRegistrationLogin.Size.Width,
-                        -textBoxRegistrationLogin.Size.Height
-                    );
+                    toolTipRegistrationLogin.Show
+                        (
+                            "Такой пользователь уже существует",
+                            textBoxRegistrationLogin,
+                            textBoxRegistrationLogin.Size.Width,
+                            -textBoxRegistrationLogin.Size.Height
+                        );
+                }
+                loginIsCorrect = false;
             }
             else
+            {
                 if (textBoxRegistrationLoginUnderLineColor == Color.Red)
                 {
                     textBoxRegistrationLoginUnderLineColor = Color.Green;
                     this.Refresh();
 
                     toolTipRegistrationLogin.Hide(textBoxRegistrationLogin);
+
                 }
+                loginIsCorrect = true;
+            }
         }
 
         private void textBoxRegistrationPassword_TextChanged(object sender, EventArgs e)
@@ -228,19 +250,13 @@ namespace Игра_пазлы
             for ( int i = 0;i<textBoxRegistrationPassword.Text.Length;i++ ) 
             {
                 if (textBoxRegistrationPassword.Text[i]>='A' && textBoxRegistrationPassword.Text[i] <= 'Z')
-                {
                     capitalLetter = true;
-                }
 
                 if (textBoxRegistrationPassword.Text[i] >= 'a' && textBoxRegistrationPassword.Text[i] <= 'z')
-                {
                     smallCaseLetter = true;
-                }
 
                 if (textBoxRegistrationPassword.Text[i] >= '0' && textBoxRegistrationPassword.Text[i] <= '9')
-                {
                     presenceOfNumbers = true;
-                }
             }
 
             if (capitalLetter && smallCaseLetter && presenceOfNumbers && textBoxRegistrationPassword.Text.Length>7) 
@@ -249,6 +265,7 @@ namespace Игра_пазлы
                 {
                     toolTipRegistrationPassword.Hide(textBoxRegistrationPassword);
                     textBoxRegistrationPasswordUnderLineColor = Color.Green;
+                    passwordIsCorrect = true;
                     this.Refresh();
                 }
             }
@@ -263,10 +280,27 @@ namespace Игра_пазлы
                         textBoxRegistrationPassword.Size.Width,
                         -textBoxRegistrationPassword.Size.Height
                     );
+                    passwordIsCorrect = false;
                     textBoxRegistrationPasswordUnderLineColor = Color.Red;
                     this.Refresh();
                 }
             }
         }
+
+        void CheckTextBoxes()
+        {
+            if (!string.IsNullOrEmpty(textBoxRegistrationName.Text) &&
+                !string.IsNullOrEmpty(textBoxRegistrationSurname.Text) &&
+                loginIsCorrect &&
+                passwordIsCorrect)
+            {
+                buttonRegistration.Enabled = true;
+            }
+            else
+            {
+                buttonRegistration.Enabled = false; 
+            }
+        }
+
     }
 }

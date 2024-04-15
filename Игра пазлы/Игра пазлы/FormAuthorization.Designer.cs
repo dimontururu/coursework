@@ -35,7 +35,6 @@ namespace Игра_пазлы
             this.labelEntranceLogin = new System.Windows.Forms.Label();
             this.textBoxEntrancePassword = new System.Windows.Forms.TextBox();
             this.labelEntrancePassword = new System.Windows.Forms.Label();
-            this.buttonEntrance = new System.Windows.Forms.Button();
             this.buttonSwitchEntrance = new System.Windows.Forms.Button();
             this.buttonSwitchRegistration = new System.Windows.Forms.Button();
             this.textBoxRegistrationName = new System.Windows.Forms.TextBox();
@@ -49,6 +48,7 @@ namespace Игра_пазлы
             this.buttonRegistration = new System.Windows.Forms.Button();
             this.toolTipRegistrationLogin = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipRegistrationPassword = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonEntrance = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxEntranceLogin
@@ -100,18 +100,6 @@ namespace Игра_пазлы
             this.labelEntrancePassword.Size = new System.Drawing.Size(90, 28);
             this.labelEntrancePassword.TabIndex = 40;
             this.labelEntrancePassword.Text = "Пароль";
-            // 
-            // buttonEntrance
-            // 
-            this.buttonEntrance.Enabled = false;
-            this.buttonEntrance.Location = new System.Drawing.Point(149, 121);
-            this.buttonEntrance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonEntrance.Name = "buttonEntrance";
-            this.buttonEntrance.Size = new System.Drawing.Size(100, 23);
-            this.buttonEntrance.TabIndex = 2;
-            this.buttonEntrance.Text = "button1";
-            this.buttonEntrance.UseVisualStyleBackColor = true;
-            this.buttonEntrance.Click += new System.EventHandler(this.buttonEntrance_Click);
             // 
             // buttonSwitchEntrance
             // 
@@ -254,15 +242,33 @@ namespace Игра_пазлы
             // 
             // buttonRegistration
             // 
+            this.buttonRegistration.BackColor = System.Drawing.Color.Green;
             this.buttonRegistration.Enabled = false;
+            this.buttonRegistration.ForeColor = System.Drawing.Color.White;
             this.buttonRegistration.Location = new System.Drawing.Point(149, 191);
             this.buttonRegistration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRegistration.Name = "buttonRegistration";
             this.buttonRegistration.Size = new System.Drawing.Size(100, 23);
             this.buttonRegistration.TabIndex = 8;
-            this.buttonRegistration.Text = "button1";
-            this.buttonRegistration.UseVisualStyleBackColor = true;
+            this.buttonRegistration.Text = "Регистрация";
+            this.buttonRegistration.UseVisualStyleBackColor = false;
             this.buttonRegistration.Visible = false;
+            // 
+            // buttonEntrance
+            // 
+            this.buttonEntrance.BackColor = System.Drawing.Color.Green;
+            this.buttonEntrance.Enabled = false;
+            this.buttonEntrance.FlatAppearance.BorderSize = 0;
+            this.buttonEntrance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEntrance.ForeColor = System.Drawing.Color.White;
+            this.buttonEntrance.Location = new System.Drawing.Point(149, 121);
+            this.buttonEntrance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonEntrance.Name = "buttonEntrance";
+            this.buttonEntrance.Size = new System.Drawing.Size(100, 23);
+            this.buttonEntrance.TabIndex = 2;
+            this.buttonEntrance.Text = "Войти";
+            this.buttonEntrance.UseVisualStyleBackColor = false;
+            this.buttonEntrance.Click += new System.EventHandler(this.buttonEntrance_Click);
             // 
             // FormAuthorization
             // 
@@ -306,7 +312,6 @@ namespace Игра_пазлы
         private System.Windows.Forms.Label labelEntranceLogin;
         private System.Windows.Forms.TextBox textBoxEntrancePassword;
         private System.Windows.Forms.Label labelEntrancePassword;
-        private System.Windows.Forms.Button buttonEntrance;
         private System.Windows.Forms.Button buttonSwitchEntrance;
         private System.Windows.Forms.Button buttonSwitchRegistration;
         private System.Windows.Forms.TextBox textBoxRegistrationName;
@@ -320,6 +325,7 @@ namespace Игра_пазлы
         private System.Windows.Forms.Button buttonRegistration;
         private System.Windows.Forms.ToolTip toolTipRegistrationLogin;
         private System.Windows.Forms.ToolTip toolTipRegistrationPassword;
+        private System.Windows.Forms.Button buttonEntrance;
     }
 }
 

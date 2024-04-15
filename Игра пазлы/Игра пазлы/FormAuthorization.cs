@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using BD;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,6 +10,14 @@ namespace Игра_пазлы
 {
     public partial class FormAuthorization : Form
     {
+        List<Control> controlsEntrance;
+        List<Control> controlsRegistration;
+
+        Color textBoxRegistrationLoginUnderLineColor = Color.Green;
+        Color textBoxRegistrationPasswordUnderLineColor = Color.Green;
+
+        bd BD=new bd();
+
         public FormAuthorization()
         {
             InitializeComponent();
@@ -13,22 +25,15 @@ namespace Игра_пазлы
             controlsRegistration=new List<Control> ();
             controlsEntrance=new List<Control> ();
 
-            foreach(Control ctl in this.Controls)
+            foreach (Control ctl in this.Controls)
             {
                 if (ctl.Name.Contains("Registration") && !ctl.Name.Contains("Switch"))
-                {
                     controlsRegistration.Add(ctl);
-                }
 
                 if (ctl.Name.Contains("Entrance") && !ctl.Name.Contains("Switch"))
-                {
                     controlsEntrance.Add(ctl);
-                }
             }
         }
-
-        List<Control> controlsEntrance;
-        List<Control> controlsRegistration;
 
         private void underlineForTextBox(){
             Graphics underlineForTextBox = this.CreateGraphics();
@@ -42,15 +47,27 @@ namespace Игра_пазлы
 
             underlineForTextBox.Clear(Color.FromArgb(64, 64, 64));
 
+            Pen pen;
             foreach (Control cnt in textBoxBuf)
             {
                 if (cnt.Name.Contains("textBox"))
                 {
-                    underlineForTextBox.DrawLine(new Pen(Color.Green),
+                    pen = new Pen(Color.Green);
+
+                    if (cnt.Name.Contains("RegistrationLogin"))
+                        pen = new Pen(textBoxRegistrationLoginUnderLineColor);
+
+                    if (cnt.Name.Contains("RegistrationPassword"))
+                        pen = new Pen(textBoxRegistrationPasswordUnderLineColor);
+
+                    underlineForTextBox.DrawLine
+                    (
+                        pen,
                         cnt.Location.X,
                         cnt.Location.Y + cnt.Height + 1,
                         cnt.Location.X + cnt.Width,
-                        cnt.Location.Y + cnt.Height + 1);
+                        cnt.Location.Y + cnt.Height + 1
+                    );
                 }
             }
         }
@@ -68,10 +85,7 @@ namespace Игра_пазлы
         private void drawningElements(List<Control> control,bool showOrHide)
         {
             foreach (Control cnt in control)
-            {
                 cnt.Visible = showOrHide;
-                cnt.Enabled = showOrHide;
-            }
         }
         private void buttonSwitchEntrance_Click(object sender, System.EventArgs e)
         {
@@ -113,6 +127,146 @@ namespace Игра_пазлы
 
            )
                 e.Handled = true;
+        }
+
+        private void textBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (
+                (number < 65 || number > 90) && //A-Z
+                (number < 97 || number > 122) && //a-z
+                (number < 48 || number > 57) && //0-1
+                (number != 8) //стиреть
+
+           )
+                e.Handled = true;
+        }
+
+        private void textBoxRegistrationNameAndSurname_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (
+                (number < 'а' || number > 'я') && //А-Я
+                (number < 'А' || number > 'Я') && //а-я
+                (number != 8) //стиреть
+
+           )
+                e.Handled = true;
+        }
+
+        private void textBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            Control control = (Control)sender;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (control.Name.Contains("Registration"))
+                {
+                    foreach (Control cnt in controlsRegistration)
+                        if (control.TabIndex + 1 == cnt.TabIndex)
+                        {
+                            cnt.Focus();
+                            break;
+                        }
+                }
+                else
+                {
+
+                    foreach (Control cnt in controlsEntrance)
+                        if (control.TabIndex + 1 == cnt.TabIndex)
+                        {
+                            cnt.Focus();
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void textBoxRegistrationLogin_TextChanged(object sender, System.EventArgs e)
+        {
+            var login = textBoxRegistrationLogin.Text;
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
+
+            string query = $"select * from Users where Login ='{login}'";
+
+            SqlCommand sqlCommand = new SqlCommand(query, BD.getbd());
+
+            adapter.SelectCommand = sqlCommand;
+            adapter.Fill(table);
+
+            if (table.Rows.Count == 1)
+            {
+                textBoxRegistrationLoginUnderLineColor = Color.Red;
+                this.Refresh();
+
+                toolTipRegistrationLogin.Show
+                    (
+                        "Такой пользователь уже существует",
+                        textBoxRegistrationLogin,
+                        textBoxRegistrationLogin.Size.Width,
+                        -textBoxRegistrationLogin.Size.Height
+                    );
+            }
+            else
+                if (textBoxRegistrationLoginUnderLineColor == Color.Red)
+                {
+                    textBoxRegistrationLoginUnderLineColor = Color.Green;
+                    this.Refresh();
+
+                    toolTipRegistrationLogin.Hide(textBoxRegistrationLogin);
+                }
+        }
+
+        private void textBoxRegistrationPassword_TextChanged(object sender, EventArgs e)
+        {
+            bool capitalLetter=false;
+            bool smallCaseLetter = false;
+            bool presenceOfNumbers = false;
+
+            for ( int i = 0;i<textBoxRegistrationPassword.Text.Length;i++ ) 
+            {
+                if (textBoxRegistrationPassword.Text[i]>='A' && textBoxRegistrationPassword.Text[i] <= 'Z')
+                {
+                    capitalLetter = true;
+                }
+
+                if (textBoxRegistrationPassword.Text[i] >= 'a' && textBoxRegistrationPassword.Text[i] <= 'z')
+                {
+                    smallCaseLetter = true;
+                }
+
+                if (textBoxRegistrationPassword.Text[i] >= '0' && textBoxRegistrationPassword.Text[i] <= '9')
+                {
+                    presenceOfNumbers = true;
+                }
+            }
+
+            if (capitalLetter && smallCaseLetter && presenceOfNumbers && textBoxRegistrationPassword.Text.Length>7) 
+            {
+                if (textBoxRegistrationPasswordUnderLineColor == Color.Red)
+                {
+                    toolTipRegistrationPassword.Hide(textBoxRegistrationPassword);
+                    textBoxRegistrationPasswordUnderLineColor = Color.Green;
+                    this.Refresh();
+                }
+            }
+            else
+            {
+                if (textBoxRegistrationPasswordUnderLineColor == Color.Green)
+                {
+                    toolTipRegistrationPassword.Show
+                    (
+                        "Пароль должен содержать не меньше 8 символов\nбуквы большого и малого регистра и цифры",
+                        textBoxRegistrationPassword,
+                        textBoxRegistrationPassword.Size.Width,
+                        -textBoxRegistrationPassword.Size.Height
+                    );
+                    textBoxRegistrationPasswordUnderLineColor = Color.Red;
+                    this.Refresh();
+                }
+            }
         }
     }
 }

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorization.cs" />
+    <Compile Include="bd.cs" />
     <Compile Include="FormAuthorization.cs">
       <SubType>Form</SubType>
     </Compile>

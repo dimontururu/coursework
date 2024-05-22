@@ -38,10 +38,13 @@ namespace Игра_пазлы
                     controlsEntrance.Add(ctl);
             }
 
-            textBoxRegistrationName.TextChanged += (sender, e) => { CheckTextBoxes(); };
-            textBoxRegistrationSurname.TextChanged += (sender, e) => { CheckTextBoxes(); };
-            textBoxRegistrationLogin.TextChanged += (sender, e) => { CheckTextBoxes(); };
-            textBoxRegistrationPassword.TextChanged += (sender, e) => { CheckTextBoxes(); };
+            textBoxRegistrationName.TextChanged += (sender, e) => { CheckTextBoxesRegistration(); };
+            textBoxRegistrationSurname.TextChanged += (sender, e) => { CheckTextBoxesRegistration(); };
+            textBoxRegistrationLogin.TextChanged += (sender, e) => { CheckTextBoxesRegistration(); };
+            textBoxRegistrationPassword.TextChanged += (sender, e) => { CheckTextBoxesRegistration(); };
+
+            textBoxEntranceLogin.TextChanged += (sender, e) => { CheckTextBoxesEntrance(); };
+            textBoxEntrancePassword.TextChanged += (sender, e) => { CheckTextBoxesEntrance(); };
 
             //buttonEntrance.FlatStyle = FlatStyle.Flat;
         }
@@ -90,7 +93,40 @@ namespace Игра_пазлы
 
         private void buttonEntrance_Click(object sender, System.EventArgs e)
         {
+            var login = textBoxEntranceLogin.Text;
+            var password = textBoxEntrancePassword.Text;
 
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
+
+            string query = $"select * from Users where login ='{login}' and password ='{password}'";
+
+            SqlCommand sqlCommand = new SqlCommand(query, BD.getbd());
+
+            adapter.SelectCommand = sqlCommand;
+            adapter.Fill(table);
+
+            if (table.Rows.Count == 1)
+            {
+                char userType = Convert.ToChar(table.Rows[0]["User_type"]);
+                this.Hide();
+                if (userType == 'A')
+                {
+                    MessageBox.Show("админ");
+                    //Form FormAdmin = new FormAdmin();
+                    //FormAdmin.Show();
+                }
+                if (userType == 'P')
+                {
+                    Form form = new FormUser();
+                    form.ShowDialog();
+                }
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Такого аккаунта не существует");
+            }
         }
 
         private void drawningElements(List<Control> control,bool showOrHide)
@@ -287,7 +323,7 @@ namespace Игра_пазлы
             }
         }
 
-        void CheckTextBoxes()
+        void CheckTextBoxesRegistration()
         {
             if (!string.IsNullOrEmpty(textBoxRegistrationName.Text) &&
                 !string.IsNullOrEmpty(textBoxRegistrationSurname.Text) &&
@@ -302,5 +338,39 @@ namespace Игра_пазлы
             }
         }
 
+        void CheckTextBoxesEntrance()
+        {
+            if (!string.IsNullOrEmpty(textBoxEntranceLogin.Text) &&
+                !string.IsNullOrEmpty(textBoxEntrancePassword.Text)
+                )
+            {
+                buttonEntrance.Enabled = true;
+            }
+            else
+            {
+                buttonEntrance.Enabled = false;
+            }
+        }
+
+        private void buttonRegistration_Click(object sender, EventArgs e)
+        {
+
+            string query = $"insert into users(Login, Password, Name, Surname, User_type) values('{textBoxRegistrationLogin.Text}','{textBoxRegistrationPassword.Text}','{textBoxRegistrationName.Text}','{textBoxRegistrationSurname.Text}','P')";
+
+            SqlCommand sqlCommand = new SqlCommand(query, BD.getbd());
+
+            BD.openconected();
+            if (sqlCommand.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("Вы успешно зарегистрировались");
+                this.Hide();
+                Form form = new FormUser();
+                form.ShowDialog();
+                this.Close();
+            }
+            else
+                MessageBox.Show("Ошибка");
+            BD.Closeconected();
+        }
     }
 }

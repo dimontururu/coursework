@@ -8,3 +8,4 @@ C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазл
 C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра пазлы.exe
 C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра пазлы.pdb
 C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра_пазлы.FormAuthorization.resources
+C:\Users\Дима\Desktop\курсовая\Игра пазлы\Игра пазлы\obj\Debug\Игра_пазлы.FormUser.resources

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Игра_пазлы
@@ -16,7 +13,7 @@ namespace Игра_пазлы
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormAuthorization());
+            Application.Run(new FormUser());
         }
     }
 }

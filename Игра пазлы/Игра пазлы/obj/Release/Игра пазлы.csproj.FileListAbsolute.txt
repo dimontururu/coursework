@@ -8,3 +8,4 @@ C:\Users\Дима\Desktop\курсовая\Игра пазлы\Игра пазл
 C:\Users\Дима\Desktop\курсовая\Игра пазлы\Игра пазлы\obj\Release\Игра пазлы.csproj.CoreCompileInputs.cache
 C:\Users\Дима\Desktop\курсовая\Игра пазлы\Игра пазлы\obj\Release\Игра пазлы.exe
 C:\Users\Дима\Desktop\курсовая\Игра пазлы\Игра пазлы\obj\Release\Игра пазлы.pdb
+C:\Users\Дима\Desktop\Курсовая\Игра пазлы\Игра пазлы\obj\Release\Игра_пазлы.FormUser.resources

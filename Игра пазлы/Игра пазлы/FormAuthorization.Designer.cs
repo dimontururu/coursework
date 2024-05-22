@@ -244,15 +244,19 @@ namespace Игра_пазлы
             // 
             this.buttonRegistration.BackColor = System.Drawing.Color.Green;
             this.buttonRegistration.Enabled = false;
+            this.buttonRegistration.FlatAppearance.BorderSize = 0;
+            this.buttonRegistration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRegistration.ForeColor = System.Drawing.Color.White;
-            this.buttonRegistration.Location = new System.Drawing.Point(149, 191);
+            this.buttonRegistration.Location = new System.Drawing.Point(146, 191);
             this.buttonRegistration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRegistration.Name = "buttonRegistration";
-            this.buttonRegistration.Size = new System.Drawing.Size(100, 23);
+            this.buttonRegistration.Size = new System.Drawing.Size(106, 23);
             this.buttonRegistration.TabIndex = 8;
             this.buttonRegistration.Text = "Регистрация";
             this.buttonRegistration.UseVisualStyleBackColor = false;
             this.buttonRegistration.Visible = false;
+            this.buttonRegistration.Click += new System.EventHandler(this.buttonRegistration_Click);
+            this.buttonRegistration.Paint += new System.Windows.Forms.PaintEventHandler(this.FormAuthorization_Paint);
             // 
             // buttonEntrance
             // 
@@ -269,6 +273,7 @@ namespace Игра_пазлы
             this.buttonEntrance.Text = "Войти";
             this.buttonEntrance.UseVisualStyleBackColor = false;
             this.buttonEntrance.Click += new System.EventHandler(this.buttonEntrance_Click);
+            this.buttonEntrance.Paint += new System.Windows.Forms.PaintEventHandler(this.FormAuthorization_Paint);
             // 
             // FormAuthorization
             // 

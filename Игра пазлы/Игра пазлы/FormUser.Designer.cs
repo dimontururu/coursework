@@ -39,8 +39,7 @@
             this.labelNameGame.AutoSize = true;
             this.labelNameGame.BackColor = System.Drawing.Color.Green;
             this.labelNameGame.Font = new System.Drawing.Font("Segoe Script", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNameGame.Location = new System.Drawing.Point(429, 32);
-            this.labelNameGame.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNameGame.Location = new System.Drawing.Point(572, 39);
             this.labelNameGame.Name = "labelNameGame";
             this.labelNameGame.Size = new System.Drawing.Size(134, 55);
             this.labelNameGame.TabIndex = 0;
@@ -49,30 +48,30 @@
             // pictureBoxButtonThreeStripes
             // 
             this.pictureBoxButtonThreeStripes.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxButtonThreeStripes.Location = new System.Drawing.Point(578, 55);
-            this.pictureBoxButtonThreeStripes.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBoxButtonThreeStripes.Location = new System.Drawing.Point(771, 68);
+            this.pictureBoxButtonThreeStripes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBoxButtonThreeStripes.Name = "pictureBoxButtonThreeStripes";
-            this.pictureBoxButtonThreeStripes.Size = new System.Drawing.Size(75, 41);
+            this.pictureBoxButtonThreeStripes.Size = new System.Drawing.Size(100, 50);
             this.pictureBoxButtonThreeStripes.TabIndex = 1;
             this.pictureBoxButtonThreeStripes.TabStop = false;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(324, 121);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Location = new System.Drawing.Point(432, 149);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(150, 81);
+            this.panel1.Size = new System.Drawing.Size(200, 100);
             this.panel1.TabIndex = 3;
             // 
             // FormUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBoxButtonThreeStripes);
             this.Controls.Add(this.labelNameGame);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormUser";
             this.Text = "FormUser";
             this.Load += new System.EventHandler(this.FormUser_Load);
